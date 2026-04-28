@@ -25,7 +25,12 @@ Il progetto è diviso in componenti modulari in `src/`. Per generare il file `ma
    python3 build.py
    ```
 
-## 📄 Licenza
-Questo progetto è rilasciato sotto la licenza **Creative Commons Attribution-NonCommercial (CC BY-NC)**.
-- ✅ Puoi usare, copiare e modificare il codice.
-- ❌ **NON è consentito l'uso a scopo commerciale.**
+## Licenza
+
+Questo progetto è distribuito sotto licenza [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.it).
+
+Sei libero di utilizzare, condividere e modificare il codice, a patto che:
+1. **Non venga utilizzato per scopi commerciali.**
+2. Qualsiasi modifica o lavoro derivato venga distribuito sotto la **stessa identica licenza**. 
+
+Consulta il file `LICENSE` incluso nel repository per i dettagli legali completi.
