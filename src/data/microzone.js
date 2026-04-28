@@ -1,0 +1,35 @@
+/**
+ * Dati delle Microzone di Messina (Allegato A)
+ * Ogni microzona definisce i valori minimi e massimi di canone per mq.
+ */
+const microzone = [
+    { id: 1, nome: "LITORANEA TIRRENICA", min: 2.840, max: 5.888 },
+    { id: 2, nome: "LITORANEA NORD", min: 3.020, max: 6.199 },
+    { id: 3, nome: "CAPO PELORO", min: 3.680, max: 6.912 },
+    { id: 4, nome: "POZZICELLO", min: 4.100, max: 7.452 },
+    { id: 5, nome: "CASTANEA DELLE FURIE", min: 2.490, max: 4.466 },
+    { id: 6, nome: "MASSE", min: 2.490, max: 4.246 },
+    { id: 7, nome: "GESSO", min: 2.530, max: 4.246 },
+    { id: 8, nome: "SALICE", min: 2.530, max: 4.246 },
+    { id: 9, nome: "SPERONE", min: 3.150, max: 6.096 },
+    { id: 10, nome: "ANNUNZIATA", min: 3.490, max: 6.600 },
+    { id: 11, nome: "GIOSTRA - RITIRO", min: 2.980, max: 5.511 },
+    { id: 12, nome: "Z.I.R. - Z.I.S.", min: 2.440, max: 5.918 },
+    { id: 13, nome: "CAMARO", min: 3.140, max: 5.852 },
+    { id: 14, nome: "LITORANEA SUD", min: 2.920, max: 5.434 },
+    { id: 15, nome: "S. LUCIA", min: 2.740, max: 4.829 },
+    { id: 16, nome: "FARO SUPERIORE", min: 2.880, max: 5.474 },
+    { id: 17, nome: "ZONA INDUSTRIALE SUD", min: 3.120, max: 5.670 },
+    { id: 18, nome: "SAN FILIPPO", min: 2.330, max: 5.005 },
+    { id: 19, nome: "TIPOLDO", min: 2.330, max: 4.180 },
+    { id: 20, nome: "MILI S. MARCO", min: 2.240, max: 4.510 },
+    { id: 21, nome: "SANTO STEFANO", min: 2.280, max: 4.180 },
+    { id: 22, nome: "PEZZOLO", min: 2.280, max: 4.235 },
+    { id: 23, nome: "GIAMPILIERI SUPERIORE", min: 2.240, max: 4.235 },
+    { id: 24, nome: "GAZZI", min: 2.850, max: 5.616 },
+    { id: 25, nome: "CENTRO STORICO", min: 3.880, max: 8.591 },
+    { id: 26, nome: "VIALE S. MARTINO", min: 4.850, max: 9.856 },
+    { id: 27, nome: "VILLA DANTE", min: 3.320, max: 6.969 },
+    { id: 28, nome: "FIERA", min: 3.990, max: 7.403 },
+    { id: 29, nome: "ZONA MONTI PELORIT.", min: 1.890, max: 4.290 },
+];

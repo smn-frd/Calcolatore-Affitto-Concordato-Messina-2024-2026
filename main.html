@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="it">
+<!-- head.html -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore Canone Concordato Messina 2024</title>
+    <!-- Tailwind CSS per lo stile -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-800 font-sans pb-12">
+
+    <!-- header.html -->
+<header class="bg-blue-900 text-white p-6 shadow-md">
+    <div class="max-w-6xl mx-auto flex items-center gap-4">
+        <i data-lucide="calculator" class="w-8 h-8 text-blue-300"></i>
+        <div>
+            <h1 class="text-2xl font-bold">Calcolatore Canone Concordato</h1>
+            <p class="text-blue-200 text-sm">Accordo Territoriale Comune di Messina 2024</p>
+        </div>
+    </div>
+</header>
+
+
+    <main class="max-w-6xl mx-auto mt-8 p-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- inputs.html -->
+<div class="lg:col-span-2 space-y-6">
+
+    <!-- SEZIONE 1: Ubicazione -->
+    <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-blue-800">
+            <i data-lucide="map-pin" class="w-5 h-5"></i> 1. Ubicazione Immobile
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-600 mb-1">Microzona (All. A)</label>
+                <select id="mzId" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 bg-slate-50">
+                    <!-- Popolato dinamicamente da microzone.js -->
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-600 mb-1">Posizione nella Zona (All. C)</label>
+                <select id="ubicazione" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 bg-slate-50">
+                    <option value="1.0">Periferia microzona (Coeff. 1.00)</option>
+                    <option value="1.1">Semi-periferia microzona (Coeff. 1.10)</option>
+                    <option value="1.2" selected>Centro microzona (Coeff. 1.20)</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEZIONE 2: Superfici -->
+    <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-blue-800">
+            <i data-lucide="ruler" class="w-5 h-5"></i> 2. Superfici e Pertinenze (Mq)
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-600 mb-1">Superficie Vani Principali (A)</label>
+                <input type="number" id="areaPrincipale" min="0" value="60" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+            <div class="col-span-1 md:col-span-2 mt-2">
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Accessori Indiretti (Soffitte, Cantine)</p>
+            </div>
+            <div>
+                <label class="block text-sm text-slate-600 mb-1">Comunicanti (50%)</label>
+                <input type="number" id="accCom" min="0" value="0" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+            <div>
+                <label class="block text-sm text-slate-600 mb-1">Non Comunicanti (25%)</label>
+                <input type="number" id="accNon" min="0" value="0" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+
+            <div class="col-span-1 md:col-span-2 mt-2">
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Balconi e Terrazze</p>
+            </div>
+            <div>
+                <label class="block text-sm text-slate-600 mb-1">Comunicanti (30% fino 25mq, 10% ecced.)</label>
+                <input type="number" id="balCom" min="0" value="0" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+            <div>
+                <label class="block text-sm text-slate-600 mb-1">Non Comunicanti (15% fino 25mq, 5% ecced.)</label>
+                <input type="number" id="balNon" min="0" value="0" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+
+            <div class="col-span-1 md:col-span-2 mt-2">
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Area Scoperta / Giardino</p>
+            </div>
+            <div>
+                <label class="block text-sm text-slate-600 mb-1">Giardino (10% fino area princ., 2% ecced.)</label>
+                <input type="number" id="giardino" min="0" value="0" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+        </div>
+        <div class="mt-4 p-3 bg-blue-50 text-blue-800 text-sm rounded-md border border-blue-100 flex gap-2">
+            <i data-lucide="info" class="w-5 h-5 shrink-0 mt-0.5"></i>
+            <p>Il calcolo applica automaticamente il cap massimo del 50% per le pertinenze e il bonus +20% per immobili inferiori a 50mq, come da Allegato C.</p>
+        </div>
+    </section>
+
+    <!-- SEZIONE 3: Caratteristiche Fabbricato -->
+    <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-blue-800">
+            <i data-lucide="home" class="w-5 h-5"></i> 3. Caratteristiche Fabbricato (All. B)
+        </h2>
+        <div class="space-y-5">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(A) Tipologia</label>
+                    <select id="catA" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0.20">A/2-A/7 Civile Abitazione (+20%)</option>
+                        <option value="0.18">A/3 Economico Popolare (+18%)</option>
+                        <option value="0.15">A/4 Popolare (+15%)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(B) Stato Fabbricato</label>
+                    <select id="catB" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0.15">Buono (+15%)</option>
+                        <option value="0.08">Medio (+8%)</option>
+                        <option value="0">Scadente (0%)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(C) Stato Alloggio</label>
+                    <select id="catC" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0.15">Buono (+15%)</option>
+                        <option value="0.08">Normale (+8%)</option>
+                        <option value="0">Da Rinnovare (0%)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(D) Pertinenze presenti?</label>
+                    <select id="catD" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0">Nessuna (0%)</option>
+                        <option value="0.05">Sì: Posto Auto/Box/Cantina/Verde (+5%)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-2">(E) Servizi Tecnici (selezionabili multipli)</label>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-50 p-2 rounded border border-slate-200 hover:bg-slate-100">
+                        <input type="checkbox" id="catE_asc" class="w-4 h-4 text-blue-600 rounded" />
+                        <span class="text-sm">Ascensore (+10%)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-50 p-2 rounded border border-slate-200 hover:bg-slate-100">
+                        <input type="checkbox" id="catE_blind" class="w-4 h-4 text-blue-600 rounded" />
+                        <span class="text-sm">Porta Blindata/Antif. (+10%)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-50 p-2 rounded border border-slate-200 hover:bg-slate-100">
+                        <input type="checkbox" id="catE_risc" class="w-4 h-4 text-blue-600 rounded" />
+                        <span class="text-sm">Risc. Aut/Centrale/Pompe Calore (+10%)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(F) Classe Energetica</label>
+                    <select id="catF" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0.30">A (+30%)</option>
+                        <option value="0.28">B (+28%)</option>
+                        <option value="0.25">C (+25%)</option>
+                        <option value="0.20">D (+20%)</option>
+                        <option value="0.15">E (+15%)</option>
+                        <option value="0.10">F (+10%)</option>
+                        <option value="0" selected>G (0%)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(G) Presenza Arredo</label>
+                    <select id="catG" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0.20">Ammobiliato (+20%)</option>
+                        <option value="0.10">Parz. Ammobiliato (+10%)</option>
+                        <option value="0" selected>Vuoto (0%)</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SEZIONE 4: Maggiorazioni Finali e Opzioni -->
+    <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-blue-800">
+            <i data-lucide="file-text" class="w-5 h-5"></i> 4. Maggiorazioni Finali & Opzioni
+        </h2>
+        <div class="space-y-4">
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">(H) Rendita Catastale (Art 5 Bis)</label>
+                <select id="catH" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                    <option value="0">Seleziona (Nessuna/Non Applicabile)</option>
+                    <option value="0.05">Da 0 a 149 € (+5%)</option>
+                    <option value="0.10">Da 150 a 299 € (+10%)</option>
+                    <option value="0.15">Da 300 a 449 € (+15%)</option>
+                    <option value="0.20">Da 450 € in poi (+20%)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Bonus Costruzione / Ristrutturazione (Art 5)</label>
+                <select id="art5" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                    <option value="0">Nessuno (0%)</option>
+                    <option value="0.15">Costruito post 1985 / Ristr. Totale L457/78 (+15%)</option>
+                    <option value="0.15">Costruito post 2005 (+15%)</option>
+                    <option value="0.15">Ristrutturato parzialmente post 2009 (+15%)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Tipologia Contratto e Maggior Durata (Art 6 Bis)</label>
+                <select id="art6bis" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50 focus:ring-2 focus:ring-blue-500">
+                    <option value="0" data-type="3+2">Agevolato Base 3+2 (0%)</option>
+                    <optgroup label="Contratti 3+2 (Oltre i 3 anni base)">
+                        <option value="0.05" data-type="3+2">4+2 Anni (+5%)</option>
+                        <option value="0.10" data-type="3+2">5+2 Anni (+10%)</option>
+                        <option value="0.15" data-type="3+2">6+2 Anni (+15%)</option>
+                    </optgroup>
+                    <optgroup label="Transitori Ordinari (1-18 mesi)">
+                        <option value="0" data-type="transitorio">Fino a 6 mesi (0%)</option>
+                        <option value="0.05" data-type="transitorio">Oltre 6 mesi (+5%)</option>
+                        <option value="0.10" data-type="transitorio">Oltre 12 mesi (+10%)</option>
+                        <option value="0.15" data-type="transitorio">Oltre 18 mesi (+15%)</option>
+                    </optgroup>
+                    <optgroup label="Transitori Studenti (6-36 mesi)">
+                        <option value="0" data-type="studenti">Fino a 6 mesi (0%)</option>
+                        <option value="0.05" data-type="studenti">Tra 6 e 12 mesi (+5%)</option>
+                        <option value="0.10" data-type="studenti">Tra 12 e 18 mesi (+10%)</option>
+                        <option value="0.15" data-type="studenti">Tra 18 e 24 mesi (+15%)</option>
+                        <option value="0.20" data-type="studenti">Tra 24 e 30 mesi (+20%)</option>
+                        <option value="0.25" data-type="studenti">Tra 30 e 36 mesi (+25%)</option>
+                    </optgroup>
+                </select>
+
+                <!-- Alert ISTAT (Visibile per 3+2) -->
+                <div id="alert-istat" class="text-xs text-blue-700 bg-blue-50 p-2 rounded mt-2 font-medium border border-blue-200">
+                    <i data-lucide="info" class="w-4 h-4 inline-block mr-1 align-text-bottom"></i>
+                    Nota ISTAT: Per i contratti agevolati, il canone può essere aggiornato annualmente del 75% della variazione ISTAT (salvo opzione Cedolare Secca).
+                </div>
+
+                <!-- Deroga Transitorio (Visibile solo per Transitori Ordinari) -->
+                <div id="derogaTransitorioContainer" class="hidden mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer bg-amber-50 p-2 rounded border border-amber-200 hover:bg-amber-100">
+                        <input type="checkbox" id="derogaTransitorio" class="w-4 h-4 text-amber-600 rounded" />
+                        <span class="text-sm font-medium text-amber-800">Applica deroga -20% (solo Transitori, DM 16/01/2017)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-200">
+                <label class="block text-sm font-medium text-slate-700 mb-1">Affitto Parziale (Stanze)</label>
+                <div class="flex items-center gap-3">
+                    <input type="number" id="numStanze" min="1" value="1" class="w-24 p-2 border border-slate-300 rounded-md bg-slate-50 text-center" />
+                    <span class="text-sm text-slate-500">Dividi canone per numero inquilini/stanze</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+        <!-- results.html -->
+<div class="lg:col-span-1">
+    <div class="sticky top-6 bg-white rounded-2xl shadow-xl border border-blue-100 overflow-hidden">
+        <!-- Box Risultato Principale -->
+        <div class="bg-blue-600 p-6 text-center text-white">
+            <i data-lucide="euro" class="w-10 h-10 mx-auto mb-2 opacity-90"></i>
+            <h3 class="text-lg font-medium opacity-90 uppercase tracking-wider">Canone Mensile</h3>
+            <div class="text-5xl font-extrabold mt-2 tracking-tight" id="res-canoneFinale">
+                € 0.00
+            </div>
+            <div class="text-blue-100 text-sm mt-3 font-medium bg-blue-700/50 p-2 rounded-lg inline-block">
+                Forbice trattativa (±10%):<br/>
+                <span id="res-tolleranzaMin">€ 0.00</span> — <span id="res-tolleranzaMax">€ 0.00</span>
+            </div>
+
+            <!-- Quota per stanza (visibile se numStanze > 1) -->
+            <div id="box-stanza" class="hidden mt-4 pt-4 border-t border-blue-500/50">
+                <h3 class="text-sm font-medium opacity-90 uppercase tracking-wider">Quota per Stanza</h3>
+                <div class="text-3xl font-bold mt-1" id="res-canoneStanza">€ 0.00</div>
+            </div>
+        </div>
+
+        <!-- Sintesi Dettagliata -->
+        <div class="p-6 space-y-4">
+            <h4 class="font-bold text-slate-800 border-b pb-2">
+                Sintesi Calcolo
+            </h4>
+
+            <!-- Superfici -->
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-600">Mq Calcolati:</span>
+                    <span class="font-medium text-slate-800" id="res-mqUtiliBase">0 mq</span>
+                </div>
+
+                <div id="alert-bonusPiccoli" class="hidden text-xs text-blue-600 bg-blue-50 p-1 rounded font-medium">
+                    Applicato Bonus +20% (superficie &lt; 50mq)
+                </div>
+
+                <div class="flex justify-between items-center font-semibold pt-1">
+                    <span class="text-slate-800">Mq Finali (x Coeff):</span>
+                    <span class="text-blue-700" id="res-mqUtiliFinali">0 mq</span>
+                </div>
+            </div>
+
+            <!-- Valori Unitari -->
+            <div class="space-y-2 text-sm border-t pt-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-600">Incremento Caratteristiche:</span>
+                    <span class="font-medium text-slate-800" id="res-percAG">+0%</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-600">Valore €/Mq applicato:</span>
+                    <span class="font-medium text-slate-800" id="res-valoreMqCalc">€ 0.000</span>
+                </div>
+
+                <!-- Alert Tetto Massimo -->
+                <div id="alert-isMaxTetto" class="hidden text-xs text-orange-700 bg-orange-50 p-2 rounded flex gap-2 font-medium border border-orange-200">
+                    <i data-lucide="shield-check" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                    <span>Tetto superato. Valore limitato al massimale della microzona (Max: € <span id="res-valoreMqMax">0.000</span>)</span>
+                </div>
+            </div>
+
+            <!-- Maggiorazioni e Penalità -->
+            <div class="space-y-2 text-sm border-t pt-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-600">Canone Iniziale:</span>
+                    <span class="font-medium text-slate-800" id="res-canoneBase">€ 0.00</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-600">Maggiorazioni Finali:</span>
+                    <span class="font-medium text-slate-800" id="res-maggiorazioniPerc">+0%</span>
+                </div>
+
+                <!-- Alert Penalità Riscaldamento -->
+                <div id="alert-penalitaRisc" class="hidden text-xs text-red-700 bg-red-50 p-2 rounded mt-2 font-medium border border-red-200">
+                    Attenzione: Il canone base è stato decurtato del 5% per mancanza di impianto di riscaldamento con tetto massimo raggiunto (Art 5).
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer del Box -->
+        <div class="bg-slate-50 p-4 border-t border-slate-200 text-xs text-slate-500 text-center leading-relaxed">
+            Il calcolo rispetta la formula ministeriale e i vincoli incrociati. È inclusa la tolleranza del 10% ammessa dall'Art. 4 in fase di pattuizione.
+        </div>
+    </div>
+</div>
+
+    </main>
+
+    <script>
+/**
+ * Dati delle Microzone di Messina (Allegato A)
+ * Ogni microzona definisce i valori minimi e massimi di canone per mq.
+ */
+const microzone = [
+    { id: 1, nome: "LITORANEA TIRRENICA", min: 2.840, max: 5.888 },
+    { id: 2, nome: "LITORANEA NORD", min: 3.020, max: 6.199 },
+    { id: 3, nome: "CAPO PELORO", min: 3.680, max: 6.912 },
+    { id: 4, nome: "POZZICELLO", min: 4.100, max: 7.452 },
+    { id: 5, nome: "CASTANEA DELLE FURIE", min: 2.490, max: 4.466 },
+    { id: 6, nome: "MASSE", min: 2.490, max: 4.246 },
+    { id: 7, nome: "GESSO", min: 2.530, max: 4.246 },
+    { id: 8, nome: "SALICE", min: 2.530, max: 4.246 },
+    { id: 9, nome: "SPERONE", min: 3.150, max: 6.096 },
+    { id: 10, nome: "ANNUNZIATA", min: 3.490, max: 6.600 },
+    { id: 11, nome: "GIOSTRA - RITIRO", min: 2.980, max: 5.511 },
+    { id: 12, nome: "Z.I.R. - Z.I.S.", min: 2.440, max: 5.918 },
+    { id: 13, nome: "CAMARO", min: 3.140, max: 5.852 },
+    { id: 14, nome: "LITORANEA SUD", min: 2.920, max: 5.434 },
+    { id: 15, nome: "S. LUCIA", min: 2.740, max: 4.829 },
+    { id: 16, nome: "FARO SUPERIORE", min: 2.880, max: 5.474 },
+    { id: 17, nome: "ZONA INDUSTRIALE SUD", min: 3.120, max: 5.670 },
+    { id: 18, nome: "SAN FILIPPO", min: 2.330, max: 5.005 },
+    { id: 19, nome: "TIPOLDO", min: 2.330, max: 4.180 },
+    { id: 20, nome: "MILI S. MARCO", min: 2.240, max: 4.510 },
+    { id: 21, nome: "SANTO STEFANO", min: 2.280, max: 4.180 },
+    { id: 22, nome: "PEZZOLO", min: 2.280, max: 4.235 },
+    { id: 23, nome: "GIAMPILIERI SUPERIORE", min: 2.240, max: 4.235 },
+    { id: 24, nome: "GAZZI", min: 2.850, max: 5.616 },
+    { id: 25, nome: "CENTRO STORICO", min: 3.880, max: 8.591 },
+    { id: 26, nome: "VIALE S. MARTINO", min: 4.850, max: 9.856 },
+    { id: 27, nome: "VILLA DANTE", min: 3.320, max: 6.969 },
+    { id: 28, nome: "FIERA", min: 3.990, max: 7.403 },
+    { id: 29, nome: "ZONA MONTI PELORIT.", min: 1.890, max: 4.290 },
+];
+
+
+/**
+ * Calcolatore Canone Concordato - Core Logic
+ * Gestisce l'inizializzazione dell'interfaccia e la logica di calcolo del canone.
+ */
+
+// Inizializza le icone Lucide
+lucide.createIcons();
+
+// Popola la select delle microzone nel DOM
+function populateMicrozones() {
+    const mzSelect = document.getElementById('mzId');
+    if (!mzSelect) return;
+    
+    microzone.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m.id;
+        opt.textContent = `${m.id} - ${m.nome} (Min: ${m.min.toFixed(3)} - Max: ${m.max.toFixed(3)})`;
+        // Default: Centro Storico (ID 25)
+        if (m.id === 25) opt.selected = true;
+        mzSelect.appendChild(opt);
+    });
+}
+
+/**
+ * Funzione principale di calcolo
+ * Legge gli input dal DOM e aggiorna i risultati in tempo reale.
+ */
+function calculate() {
+    // --- 1. Recupero Valori Input ---
+    const mzId = Number(document.getElementById('mzId').value);
+    const ubicazione = Number(document.getElementById('ubicazione').value);
+
+    // Superfici (con fallback a 0 se l'input è vuoto)
+    const areaPrincipale = Number(document.getElementById('areaPrincipale').value) || 0;
+    const accCom = Number(document.getElementById('accCom').value) || 0;
+    const accNon = Number(document.getElementById('accNon').value) || 0;
+    const balCom = Number(document.getElementById('balCom').value) || 0;
+    const balNon = Number(document.getElementById('balNon').value) || 0;
+    const giardino = Number(document.getElementById('giardino').value) || 0;
+
+    // Caratteristiche (Allegato B)
+    const catA = Number(document.getElementById('catA').value);
+    const catB = Number(document.getElementById('catB').value);
+    const catC = Number(document.getElementById('catC').value);
+    const catD = Number(document.getElementById('catD').value);
+    const catE_asc = document.getElementById('catE_asc').checked;
+    const catE_blind = document.getElementById('catE_blind').checked;
+    const catE_risc = document.getElementById('catE_risc').checked;
+    const catF = Number(document.getElementById('catF').value);
+    const catG = Number(document.getElementById('catG').value);
+
+    // Maggiorazioni finali
+    const catH = Number(document.getElementById('catH').value);
+    const art5 = Number(document.getElementById('art5').value);
+
+    // Tipo di contratto e opzioni extra
+    const art6bisSelect = document.getElementById('art6bis');
+    const art6bis = Number(art6bisSelect.value);
+    const contractType = art6bisSelect.options[art6bisSelect.selectedIndex].getAttribute('data-type');
+
+    const derogaCheckbox = document.getElementById('derogaTransitorio');
+    const numStanze = Math.max(1, Number(document.getElementById('numStanze').value) || 1);
+
+    // --- 2. Gestione Interfaccia Dinamica ---
+    const derogaContainer = document.getElementById('derogaTransitorioContainer');
+    const istatAlert = document.getElementById('alert-istat');
+
+    if (contractType === 'transitorio') {
+        derogaContainer.classList.remove('hidden');
+        istatAlert.classList.add('hidden');
+    } else if (contractType === '3+2') {
+        derogaContainer.classList.add('hidden');
+        derogaCheckbox.checked = false; // Reset deroga se si cambia tipo contratto
+        istatAlert.classList.remove('hidden');
+    } else {
+        derogaContainer.classList.add('hidden');
+        derogaCheckbox.checked = false;
+        istatAlert.classList.add('hidden');
+    }
+
+    // --- 3. Calcolo Superficie Convenzionale (Allegato C) ---
+    // Calcolo coefficienti per pertinenze
+    let b_com = accCom * 0.50;
+    let b_non = accNon * 0.25;
+
+    // Balconi: 30% fino a 25mq, 10% eccedenza
+    let c_com_val = Math.min(balCom, 25) * 0.30 + Math.max(0, balCom - 25) * 0.10;
+    // Balconi non com: 15% fino a 25mq, 5% eccedenza
+    let c_non_val = Math.min(balNon, 25) * 0.15 + Math.max(0, balNon - 25) * 0.05;
+
+    // Giardino: 10% fino alla superficie principale, 2% eccedenza
+    let d_giar_val = Math.min(giardino, areaPrincipale) * 0.10 + Math.max(0, giardino - areaPrincipale) * 0.02;
+
+    let pertinenzeTotali = b_com + b_non + c_com_val + c_non_val + d_giar_val;
+
+    // Limite invalicabile: le pertinenze non possono superare il 50% della sup. principale
+    let pertinenzeAmmesse = Math.min(pertinenzeTotali, areaPrincipale / 2);
+
+    let mqIniziale = areaPrincipale + pertinenzeAmmesse;
+
+    // Calcolo area base
+    let mqBase = mqIniziale;
+    let isBonusPiccoli = false;
+
+    // Bonus per piccoli immobili (< 50mq convenzionali)
+    if (mqBase > 0 && mqBase < 50) {
+        isBonusPiccoli = true;
+        mqBase = mqBase * 1.20;
+    }
+
+    // Coefficiente ubicazione (Centro/Semi-periferia/Periferia)
+    let mqFinali = mqBase * ubicazione;
+
+    // --- 4. Calcolo Valore Unitario (€/mq) ---
+    const mz = microzone.find(m => m.id === mzId);
+    let currentMin = mz.min;
+    let currentMax = mz.max;
+
+    // Deroga transitori (-20% sui valori di zona)
+    if (derogaCheckbox.checked) {
+        currentMin *= 0.80;
+        currentMax *= 0.80;
+    }
+
+    const diffMz = currentMax - currentMin;
+
+    // Somma incrementi caratteristiche (Allegato B)
+    let e_tot = (catE_asc ? 0.10 : 0) + (catE_blind ? 0.10 : 0) + (catE_risc ? 0.10 : 0);
+    let percAG = catA + catB + catC + catD + e_tot + catF + catG;
+
+    // Interpolazione valore basata sulle caratteristiche
+    let valSqm = currentMin + (diffMz * percAG);
+
+    // Incremento per rendita catastale (Art 5 Bis)
+    valSqm = valSqm * (1 + catH);
+
+    let isMax = false;
+    // Controllo tetto massimo (non può superare il max della microzona)
+    if (valSqm >= currentMax) {
+        valSqm = currentMax;
+        isMax = true;
+    }
+
+    // Penalità assenza riscaldamento se al tetto massimo (Art 5)
+    let penalita = false;
+    if (!catE_risc && isMax) {
+        valSqm = valSqm * 0.95;
+        penalita = true;
+    }
+
+    // Canone prima delle maggiorazioni contrattuali
+    let canoneIniziale = valSqm * mqFinali;
+
+    // --- 5. Maggiorazioni Finali (Art. 5, 6 Bis) ---
+    let maggiorazioniTot = art5 + art6bis;
+    let canoneDefinitivo = canoneIniziale * (1 + maggiorazioniTot);
+
+    // Calcolo forbice di tolleranza (+/- 10%) e quota stanza
+    const tolleranzaMin = canoneDefinitivo * 0.90;
+    const tolleranzaMax = canoneDefinitivo * 1.10;
+    const canoneStanza = canoneDefinitivo / numStanze;
+
+    // --- 6. Aggiornamento Interfaccia (DOM) ---
+    document.getElementById('res-mqUtiliBase').innerText = mqBase.toFixed(2) + ' mq';
+    document.getElementById('res-mqUtiliFinali').innerText = mqFinali.toFixed(2) + ' mq';
+
+    const alertBonus = document.getElementById('alert-bonusPiccoli');
+    if(isBonusPiccoli) alertBonus.classList.remove('hidden'); else alertBonus.classList.add('hidden');
+
+    document.getElementById('res-percAG').innerText = '+' + (percAG * 100).toFixed(0) + '%';
+    document.getElementById('res-valoreMqCalc').innerText = '€ ' + valSqm.toFixed(3);
+
+    const alertTetto = document.getElementById('alert-isMaxTetto');
+    if(isMax) {
+        alertTetto.classList.remove('hidden');
+        alertTetto.classList.add('flex');
+    } else {
+        alertTetto.classList.add('hidden');
+        alertTetto.classList.remove('flex');
+    }
+    document.getElementById('res-valoreMqMax').innerText = currentMax.toFixed(3);
+
+    document.getElementById('res-canoneBase').innerText = '€ ' + canoneIniziale.toFixed(2);
+    document.getElementById('res-maggiorazioniPerc').innerText = '+' + (maggiorazioniTot * 100).toFixed(0) + '%';
+
+    const alertRisc = document.getElementById('alert-penalitaRisc');
+    if(penalita) alertRisc.classList.remove('hidden'); else alertRisc.classList.add('hidden');
+
+    // Risultati finali
+    document.getElementById('res-canoneFinale').innerText = '€ ' + canoneDefinitivo.toFixed(2);
+    document.getElementById('res-tolleranzaMin').innerText = '€ ' + tolleranzaMin.toFixed(2);
+    document.getElementById('res-tolleranzaMax').innerText = '€ ' + tolleranzaMax.toFixed(2);
+
+    const boxStanza = document.getElementById('box-stanza');
+    if(numStanze > 1) {
+        boxStanza.classList.remove('hidden');
+        document.getElementById('res-canoneStanza').innerText = '€ ' + canoneStanza.toFixed(2);
+    } else {
+        boxStanza.classList.add('hidden');
+    }
+}
+
+// --- Event Listeners ---
+document.addEventListener('DOMContentLoaded', () => {
+    populateMicrozones();
+    
+    // Aggiungi listener a tutti gli input per aggiornamento live
+    const inputs = document.querySelectorAll('input, select');
+    inputs.forEach(input => {
+        input.addEventListener('input', calculate);
+        input.addEventListener('change', calculate);
+    });
+
+    // Calcolo iniziale
+    calculate();
+});
+
+    </script>
+</body>
+</html>

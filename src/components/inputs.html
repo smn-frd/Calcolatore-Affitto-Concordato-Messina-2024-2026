@@ -1,0 +1,239 @@
+<!-- inputs.html -->
+<div class="lg:col-span-2 space-y-6">
+
+    <!-- SEZIONE 1: Ubicazione -->
+    <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-blue-800">
+            <i data-lucide="map-pin" class="w-5 h-5"></i> 1. Ubicazione Immobile
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-600 mb-1">Microzona (All. A)</label>
+                <select id="mzId" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 bg-slate-50">
+                    <!-- Popolato dinamicamente da microzone.js -->
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-slate-600 mb-1">Posizione nella Zona (All. C)</label>
+                <select id="ubicazione" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 bg-slate-50">
+                    <option value="1.0">Periferia microzona (Coeff. 1.00)</option>
+                    <option value="1.1">Semi-periferia microzona (Coeff. 1.10)</option>
+                    <option value="1.2" selected>Centro microzona (Coeff. 1.20)</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEZIONE 2: Superfici -->
+    <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-blue-800">
+            <i data-lucide="ruler" class="w-5 h-5"></i> 2. Superfici e Pertinenze (Mq)
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-600 mb-1">Superficie Vani Principali (A)</label>
+                <input type="number" id="areaPrincipale" min="0" value="60" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+            <div class="col-span-1 md:col-span-2 mt-2">
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Accessori Indiretti (Soffitte, Cantine)</p>
+            </div>
+            <div>
+                <label class="block text-sm text-slate-600 mb-1">Comunicanti (50%)</label>
+                <input type="number" id="accCom" min="0" value="0" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+            <div>
+                <label class="block text-sm text-slate-600 mb-1">Non Comunicanti (25%)</label>
+                <input type="number" id="accNon" min="0" value="0" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+
+            <div class="col-span-1 md:col-span-2 mt-2">
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Balconi e Terrazze</p>
+            </div>
+            <div>
+                <label class="block text-sm text-slate-600 mb-1">Comunicanti (30% fino 25mq, 10% ecced.)</label>
+                <input type="number" id="balCom" min="0" value="0" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+            <div>
+                <label class="block text-sm text-slate-600 mb-1">Non Comunicanti (15% fino 25mq, 5% ecced.)</label>
+                <input type="number" id="balNon" min="0" value="0" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+
+            <div class="col-span-1 md:col-span-2 mt-2">
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Area Scoperta / Giardino</p>
+            </div>
+            <div>
+                <label class="block text-sm text-slate-600 mb-1">Giardino (10% fino area princ., 2% ecced.)</label>
+                <input type="number" id="giardino" min="0" value="0" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50" />
+            </div>
+        </div>
+        <div class="mt-4 p-3 bg-blue-50 text-blue-800 text-sm rounded-md border border-blue-100 flex gap-2">
+            <i data-lucide="info" class="w-5 h-5 shrink-0 mt-0.5"></i>
+            <p>Il calcolo applica automaticamente il cap massimo del 50% per le pertinenze e il bonus +20% per immobili inferiori a 50mq, come da Allegato C.</p>
+        </div>
+    </section>
+
+    <!-- SEZIONE 3: Caratteristiche Fabbricato -->
+    <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-blue-800">
+            <i data-lucide="home" class="w-5 h-5"></i> 3. Caratteristiche Fabbricato (All. B)
+        </h2>
+        <div class="space-y-5">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(A) Tipologia</label>
+                    <select id="catA" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0.20">A/2-A/7 Civile Abitazione (+20%)</option>
+                        <option value="0.18">A/3 Economico Popolare (+18%)</option>
+                        <option value="0.15">A/4 Popolare (+15%)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(B) Stato Fabbricato</label>
+                    <select id="catB" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0.15">Buono (+15%)</option>
+                        <option value="0.08">Medio (+8%)</option>
+                        <option value="0">Scadente (0%)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(C) Stato Alloggio</label>
+                    <select id="catC" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0.15">Buono (+15%)</option>
+                        <option value="0.08">Normale (+8%)</option>
+                        <option value="0">Da Rinnovare (0%)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(D) Pertinenze presenti?</label>
+                    <select id="catD" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0">Nessuna (0%)</option>
+                        <option value="0.05">Sì: Posto Auto/Box/Cantina/Verde (+5%)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-2">(E) Servizi Tecnici (selezionabili multipli)</label>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-50 p-2 rounded border border-slate-200 hover:bg-slate-100">
+                        <input type="checkbox" id="catE_asc" class="w-4 h-4 text-blue-600 rounded" />
+                        <span class="text-sm">Ascensore (+10%)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-50 p-2 rounded border border-slate-200 hover:bg-slate-100">
+                        <input type="checkbox" id="catE_blind" class="w-4 h-4 text-blue-600 rounded" />
+                        <span class="text-sm">Porta Blindata/Antif. (+10%)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer bg-slate-50 p-2 rounded border border-slate-200 hover:bg-slate-100">
+                        <input type="checkbox" id="catE_risc" class="w-4 h-4 text-blue-600 rounded" />
+                        <span class="text-sm">Risc. Aut/Centrale/Pompe Calore (+10%)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(F) Classe Energetica</label>
+                    <select id="catF" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0.30">A (+30%)</option>
+                        <option value="0.28">B (+28%)</option>
+                        <option value="0.25">C (+25%)</option>
+                        <option value="0.20">D (+20%)</option>
+                        <option value="0.15">E (+15%)</option>
+                        <option value="0.10">F (+10%)</option>
+                        <option value="0" selected>G (0%)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">(G) Presenza Arredo</label>
+                    <select id="catG" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                        <option value="0.20">Ammobiliato (+20%)</option>
+                        <option value="0.10">Parz. Ammobiliato (+10%)</option>
+                        <option value="0" selected>Vuoto (0%)</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SEZIONE 4: Maggiorazioni Finali e Opzioni -->
+    <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2 text-blue-800">
+            <i data-lucide="file-text" class="w-5 h-5"></i> 4. Maggiorazioni Finali & Opzioni
+        </h2>
+        <div class="space-y-4">
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">(H) Rendita Catastale (Art 5 Bis)</label>
+                <select id="catH" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                    <option value="0">Seleziona (Nessuna/Non Applicabile)</option>
+                    <option value="0.05">Da 0 a 149 € (+5%)</option>
+                    <option value="0.10">Da 150 a 299 € (+10%)</option>
+                    <option value="0.15">Da 300 a 449 € (+15%)</option>
+                    <option value="0.20">Da 450 € in poi (+20%)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Bonus Costruzione / Ristrutturazione (Art 5)</label>
+                <select id="art5" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50">
+                    <option value="0">Nessuno (0%)</option>
+                    <option value="0.15">Costruito post 1985 / Ristr. Totale L457/78 (+15%)</option>
+                    <option value="0.15">Costruito post 2005 (+15%)</option>
+                    <option value="0.15">Ristrutturato parzialmente post 2009 (+15%)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Tipologia Contratto e Maggior Durata (Art 6 Bis)</label>
+                <select id="art6bis" class="w-full p-2 border border-slate-300 rounded-md bg-slate-50 focus:ring-2 focus:ring-blue-500">
+                    <option value="0" data-type="3+2">Agevolato Base 3+2 (0%)</option>
+                    <optgroup label="Contratti 3+2 (Oltre i 3 anni base)">
+                        <option value="0.05" data-type="3+2">4+2 Anni (+5%)</option>
+                        <option value="0.10" data-type="3+2">5+2 Anni (+10%)</option>
+                        <option value="0.15" data-type="3+2">6+2 Anni (+15%)</option>
+                    </optgroup>
+                    <optgroup label="Transitori Ordinari (1-18 mesi)">
+                        <option value="0" data-type="transitorio">Fino a 6 mesi (0%)</option>
+                        <option value="0.05" data-type="transitorio">Oltre 6 mesi (+5%)</option>
+                        <option value="0.10" data-type="transitorio">Oltre 12 mesi (+10%)</option>
+                        <option value="0.15" data-type="transitorio">Oltre 18 mesi (+15%)</option>
+                    </optgroup>
+                    <optgroup label="Transitori Studenti (6-36 mesi)">
+                        <option value="0" data-type="studenti">Fino a 6 mesi (0%)</option>
+                        <option value="0.05" data-type="studenti">Tra 6 e 12 mesi (+5%)</option>
+                        <option value="0.10" data-type="studenti">Tra 12 e 18 mesi (+10%)</option>
+                        <option value="0.15" data-type="studenti">Tra 18 e 24 mesi (+15%)</option>
+                        <option value="0.20" data-type="studenti">Tra 24 e 30 mesi (+20%)</option>
+                        <option value="0.25" data-type="studenti">Tra 30 e 36 mesi (+25%)</option>
+                    </optgroup>
+                </select>
+
+                <!-- Alert ISTAT (Visibile per 3+2) -->
+                <div id="alert-istat" class="text-xs text-blue-700 bg-blue-50 p-2 rounded mt-2 font-medium border border-blue-200">
+                    <i data-lucide="info" class="w-4 h-4 inline-block mr-1 align-text-bottom"></i>
+                    Nota ISTAT: Per i contratti agevolati, il canone può essere aggiornato annualmente del 75% della variazione ISTAT (salvo opzione Cedolare Secca).
+                </div>
+
+                <!-- Deroga Transitorio (Visibile solo per Transitori Ordinari) -->
+                <div id="derogaTransitorioContainer" class="hidden mt-2">
+                    <label class="flex items-center gap-2 cursor-pointer bg-amber-50 p-2 rounded border border-amber-200 hover:bg-amber-100">
+                        <input type="checkbox" id="derogaTransitorio" class="w-4 h-4 text-amber-600 rounded" />
+                        <span class="text-sm font-medium text-amber-800">Applica deroga -20% (solo Transitori, DM 16/01/2017)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-200">
+                <label class="block text-sm font-medium text-slate-700 mb-1">Affitto Parziale (Stanze)</label>
+                <div class="flex items-center gap-3">
+                    <input type="number" id="numStanze" min="1" value="1" class="w-24 p-2 border border-slate-300 rounded-md bg-slate-50 text-center" />
+                    <span class="text-sm text-slate-500">Dividi canone per numero inquilini/stanze</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>

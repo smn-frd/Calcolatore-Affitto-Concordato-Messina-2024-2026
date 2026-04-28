@@ -1,0 +1,87 @@
+<!-- results.html -->
+<div class="lg:col-span-1">
+    <div class="sticky top-6 bg-white rounded-2xl shadow-xl border border-blue-100 overflow-hidden">
+        <!-- Box Risultato Principale -->
+        <div class="bg-blue-600 p-6 text-center text-white">
+            <i data-lucide="euro" class="w-10 h-10 mx-auto mb-2 opacity-90"></i>
+            <h3 class="text-lg font-medium opacity-90 uppercase tracking-wider">Canone Mensile</h3>
+            <div class="text-5xl font-extrabold mt-2 tracking-tight" id="res-canoneFinale">
+                € 0.00
+            </div>
+            <div class="text-blue-100 text-sm mt-3 font-medium bg-blue-700/50 p-2 rounded-lg inline-block">
+                Forbice trattativa (±10%):<br/>
+                <span id="res-tolleranzaMin">€ 0.00</span> — <span id="res-tolleranzaMax">€ 0.00</span>
+            </div>
+
+            <!-- Quota per stanza (visibile se numStanze > 1) -->
+            <div id="box-stanza" class="hidden mt-4 pt-4 border-t border-blue-500/50">
+                <h3 class="text-sm font-medium opacity-90 uppercase tracking-wider">Quota per Stanza</h3>
+                <div class="text-3xl font-bold mt-1" id="res-canoneStanza">€ 0.00</div>
+            </div>
+        </div>
+
+        <!-- Sintesi Dettagliata -->
+        <div class="p-6 space-y-4">
+            <h4 class="font-bold text-slate-800 border-b pb-2">
+                Sintesi Calcolo
+            </h4>
+
+            <!-- Superfici -->
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-600">Mq Calcolati:</span>
+                    <span class="font-medium text-slate-800" id="res-mqUtiliBase">0 mq</span>
+                </div>
+
+                <div id="alert-bonusPiccoli" class="hidden text-xs text-blue-600 bg-blue-50 p-1 rounded font-medium">
+                    Applicato Bonus +20% (superficie &lt; 50mq)
+                </div>
+
+                <div class="flex justify-between items-center font-semibold pt-1">
+                    <span class="text-slate-800">Mq Finali (x Coeff):</span>
+                    <span class="text-blue-700" id="res-mqUtiliFinali">0 mq</span>
+                </div>
+            </div>
+
+            <!-- Valori Unitari -->
+            <div class="space-y-2 text-sm border-t pt-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-600">Incremento Caratteristiche:</span>
+                    <span class="font-medium text-slate-800" id="res-percAG">+0%</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-600">Valore €/Mq applicato:</span>
+                    <span class="font-medium text-slate-800" id="res-valoreMqCalc">€ 0.000</span>
+                </div>
+
+                <!-- Alert Tetto Massimo -->
+                <div id="alert-isMaxTetto" class="hidden text-xs text-orange-700 bg-orange-50 p-2 rounded flex gap-2 font-medium border border-orange-200">
+                    <i data-lucide="shield-check" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                    <span>Tetto superato. Valore limitato al massimale della microzona (Max: € <span id="res-valoreMqMax">0.000</span>)</span>
+                </div>
+            </div>
+
+            <!-- Maggiorazioni e Penalità -->
+            <div class="space-y-2 text-sm border-t pt-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-600">Canone Iniziale:</span>
+                    <span class="font-medium text-slate-800" id="res-canoneBase">€ 0.00</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-600">Maggiorazioni Finali:</span>
+                    <span class="font-medium text-slate-800" id="res-maggiorazioniPerc">+0%</span>
+                </div>
+
+                <!-- Alert Penalità Riscaldamento -->
+                <div id="alert-penalitaRisc" class="hidden text-xs text-red-700 bg-red-50 p-2 rounded mt-2 font-medium border border-red-200">
+                    Attenzione: Il canone base è stato decurtato del 5% per mancanza di impianto di riscaldamento con tetto massimo raggiunto (Art 5).
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer del Box -->
+        <div class="bg-slate-50 p-4 border-t border-slate-200 text-xs text-slate-500 text-center leading-relaxed">
+            Il calcolo rispetta la formula ministeriale e i vincoli incrociati. È inclusa la tolleranza del 10% ammessa dall'Art. 4 in fase di pattuizione.
+        </div>
+    </div>
+</div>
