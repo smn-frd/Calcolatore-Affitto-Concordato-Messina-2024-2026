@@ -5,7 +5,7 @@ def build():
     # Definisci i percorsi
     base_dir = os.path.dirname(os.path.abspath(__file__))
     src_dir = os.path.join(base_dir, 'src')
-    output_file = os.path.join(base_dir, 'main.html')
+    output_file = os.path.join(base_dir, 'index.html')
 
     print(f"Inizio build di {output_file}...")
 
@@ -45,7 +45,7 @@ def build():
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(full_html)
 
-    print("Build completata con successo! Apri main.html per testare.")
+    print("Build completata con successo! Apri index.html per testare.")
 
 if __name__ == "__main__":
     build()
