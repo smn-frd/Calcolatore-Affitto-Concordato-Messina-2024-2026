@@ -1,5 +1,7 @@
 # Calcolatore Canone Concordato Messina 2024
 
+🌐 **[👉 CLICCA QUI PER USARE IL CALCOLATORE ONLINE 👈](https://smn-frd.github.io/Calcolatore-Affitto-Concordato-Messina-2024-2026/)**
+
 Questo è un calcolatore online basato sull'**Accordo Territoriale del Comune di Messina 2024**. Lo strumento è progettato per aiutare proprietari e inquilini a farsi un'idea del valore del canone con cui si può affittare un immobile seguendo le regole del canone concordato.
 
 ## 🚀 Funzionalità
